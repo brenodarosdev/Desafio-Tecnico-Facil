@@ -1,7 +1,7 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.service;
 
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioRequest;
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioResponse;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioCriadoResponse;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.repository.FuncionarioRepository;
 import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,10 @@ public class FuncionarioApplicationService implements FuncionarioService{
     private final FuncionarioRepository funcionarioRepository;
 
     @Override
-    public FuncionarioResponse criaNovoFuncionario(FuncionarioRequest funcionarioRequest) {
+    public FuncionarioCriadoResponse criaNovoFuncionario(FuncionarioNovoRequest funcionarioNovoRequest) {
         log.info("[inicia] FuncionarioApplicationService - criaNovoFuncionario");
-        Funcionario funcionario = funcionarioRepository.salva(new Funcionario(funcionarioRequest));
+        Funcionario funcionario = funcionarioRepository.salva(new Funcionario(funcionarioNovoRequest));
         log.info("[finaliza] FuncionarioApplicationService - criaNovoFuncionario");
-        return FuncionarioResponse.builder()
-                .idFuncionario(funcionario.getIdFuncionario())
-                .build();
+        return new FuncionarioCriadoResponse(funcionario);
     }
 }

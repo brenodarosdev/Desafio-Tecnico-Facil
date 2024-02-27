@@ -11,5 +11,5 @@ public interface FuncionarioAPI {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(summary = "Cria novo funcionário")
-    FuncionarioResponse postNovoFuncionario(@Valid @RequestBody FuncionarioRequest funcionarioRequest);
+    FuncionarioCriadoResponse postNovoFuncionario(@Valid @RequestBody FuncionarioNovoRequest funcionarioNovoRequest);
 }

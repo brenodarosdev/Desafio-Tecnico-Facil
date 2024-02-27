@@ -12,9 +12,9 @@ public class FuncionarioController implements FuncionarioAPI {
     private final FuncionarioService funcionarioService;
 
     @Override
-    public FuncionarioResponse postNovoFuncionario(FuncionarioRequest funcionarioRequest) {
+    public FuncionarioCriadoResponse postNovoFuncionario(FuncionarioNovoRequest funcionarioNovoRequest) {
         log.info("[inicia] FuncionarioController - postNovoFuncionario");
-        FuncionarioResponse funcionarioCriado = funcionarioService.criaNovoFuncionario(funcionarioRequest);
+        FuncionarioCriadoResponse funcionarioCriado = funcionarioService.criaNovoFuncionario(funcionarioNovoRequest);
         log.info("[finaliza] FuncionarioController - postNovoFuncionario");
         return funcionarioCriado;
     }
