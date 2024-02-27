@@ -1,6 +1,7 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.domain;
 
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioRequest;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -32,12 +33,12 @@ public class Funcionario {
     @DBRef
     private Endereco endereco;
 
-    public Funcionario(String nomeCompleto, String designacao, BigDecimal salario, String telefone,
-                       Endereco endereco) {
-        this.nomeCompleto = nomeCompleto;
-        this.designacao = designacao;
-        this.salario = salario;
-        this.telefone = telefone;
-        this.endereco = endereco;
+    public Funcionario(FuncionarioRequest funcionarioRequest) {
+        this.nomeCompleto = funcionarioRequest.getNomeCompleto();
+        this.designacao = funcionarioRequest.getDesignacao();
+        this.salario = funcionarioRequest.getSalario();
+        this.telefone = funcionarioRequest.getTelefone();
+        // TODO Impementar enderecoRequest
+        // this.endereco = enderecoRequest.getEndereco();
     }
 }
