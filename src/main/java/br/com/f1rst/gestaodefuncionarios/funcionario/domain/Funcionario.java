@@ -1,5 +1,7 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.domain;
 
+import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
@@ -7,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -21,17 +24,16 @@ public class Funcionario {
     private String nomeCompleto;
     @NotBlank(message = "O campo designacao não pode estar em branco")
     private String designacao;
-    @NotBlank(message = "O campo salario não pode estar em branco")
+    @DecimalMin(value = "0.0")
     private BigDecimal salario;
-    // TODO Mudar mensagem para tratamento de exceção
     @NotBlank(message = "O campo telefone não pode estar em branco")
     @Size(min = 10, max = 11, message = "O campo telefone deve ter entre 10 e 11 caracteres")
     private String telefone;
-    private EnderecoFuncionario endereco;
+    @DBRef
+    private Endereco endereco;
 
-    public Funcionario(UUID idFuncionario, String nomeCompleto, String designacao, BigDecimal salario, String telefone,
-                       EnderecoFuncionario endereco) {
-        this.idFuncionario = idFuncionario;
+    public Funcionario(String nomeCompleto, String designacao, BigDecimal salario, String telefone,
+                       Endereco endereco) {
         this.nomeCompleto = nomeCompleto;
         this.designacao = designacao;
         this.salario = salario;

@@ -1,6 +1,6 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.api;
 
-import br.com.f1rst.gestaodefuncionarios.funcionario.domain.EnderecoFuncionario;
+import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
 import lombok.Builder;
 import lombok.Value;
 
@@ -15,5 +15,5 @@ public class FuncionarioResponse {
     private String designacao;
     private BigDecimal salario;
     private String telefone;
-    private EnderecoFuncionario endereco;
+    private Endereco endereco;
 }

@@ -1,13 +1,17 @@
-package br.com.f1rst.gestaodefuncionarios.funcionario.domain;
+package br.com.f1rst.gestaodefuncionarios.endereco.application.api;
 
+import br.com.f1rst.gestaodefuncionarios.endereco.domain.EstadoBrasileiro;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Value;
 
-public class EnderecoFuncionario {
+@Value
+public class EnderecoRequest {
     @NotBlank(message = "O campo cep não pode estar em branco")
     @Size(min = 8, max = 8, message = "O cep deve ter 8 caracteres")
     private String cep;
-    @NotBlank(message = "O campo estadoBrasileiro não pode estar em branco")
+    @NotNull(message = "O campo estadoBrasileiro não pode ser nulo")
     private EstadoBrasileiro estadoBrasileiro;
     @NotBlank(message = "O campo cidade não pode estar em branco")
     private String cidade;
