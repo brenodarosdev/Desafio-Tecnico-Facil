@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/{idFuncionario}/endereco")
+@RequestMapping("/funcionario/{idFuncionario}/endereco")
 public interface EnderecoAPI {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(summary = "Cria novo Endereço")
-    EnderecoCriadoResponse postNovoEndereco(@Valid @RequestBody EnderecoRequest novoEndereco, @PathVariable UUID idFuncionario);
+    EnderecoCriadoResponse postNovoEndereco(@Valid @RequestBody EnderecoRequest novoEndereco
+            ,@PathVariable UUID idFuncionario);
 }
