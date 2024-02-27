@@ -21,6 +21,7 @@ public class Funcionario {
     @Id
     @Indexed(unique = true)
     private UUID idFuncionario;
+    // TODO idEndereco
     @NotBlank(message = "O campo nomeCompleto não pode estar em branco")
     private String nomeCompleto;
     @NotBlank(message = "O campo designacao não pode estar em branco")
