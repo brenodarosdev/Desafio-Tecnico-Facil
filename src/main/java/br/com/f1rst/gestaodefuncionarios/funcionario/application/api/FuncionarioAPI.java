@@ -17,8 +17,7 @@ public interface FuncionarioAPI {
     @Operation(summary = "Cria novo funcionário")
     FuncionarioCriadoResponse postNovoFuncionario(@Valid @RequestBody FuncionarioNovoRequest funcionarioNovoRequest);
 
-    @GetMapping("/{idFunciona" +
-            "rio}")
+    @GetMapping("/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.OK)
     @Operation(summary = "Busca Funcionário por ID")
     FuncionarioCriadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
