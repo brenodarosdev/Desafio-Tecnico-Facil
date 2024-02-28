@@ -7,4 +7,5 @@ import java.util.UUID;
 public interface FuncionarioRepository {
     Funcionario salva(Funcionario funcionario);
     Funcionario funcionarioPorId(UUID idFuncionario);
+    void deletaFuncionarioPorId(UUID idFuncionario);
 }
