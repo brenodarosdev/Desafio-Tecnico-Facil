@@ -28,4 +28,6 @@ public interface FuncionarioAPI {
     @Operation(summary = "Altera Funcionário")
     void patchAlteraFuncionario(@Valid @RequestBody AlteraFuncionarioRequest alteraFuncionarioRequest,
                                 @PathVariable UUID idFuncionario);
+
+    // TODO Criar patch para alterar endereco do funcionario
 }
