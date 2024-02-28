@@ -8,15 +8,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@Document(collection = "Endereço")
 public class Endereco {
     @Id
-    @Indexed(unique = true)
     private UUID idEndereco;
     @NotBlank(message = "O campo cep não pode estar em branco")
     @Size(min = 8, max = 8, message = "O cep deve ter 8 caracteres")
