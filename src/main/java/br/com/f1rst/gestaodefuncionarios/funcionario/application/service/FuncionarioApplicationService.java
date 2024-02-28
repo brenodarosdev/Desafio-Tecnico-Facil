@@ -47,4 +47,10 @@ public class FuncionarioApplicationService implements FuncionarioService{
         funcionarioRepository.salva(funcionario);
         log.info("[finaliza] FuncionarioApplicationService - alteraFuncionario");
     }
+
+    @Override
+    public void deletaFuncionario(UUID idFuncionario) {
+        log.info("[inicia] FuncionarioApplicationService - deletaFuncionario");
+        log.info("[finaliza] FuncionarioApplicationService - deletaFuncionario");
+    }
 }
