@@ -23,11 +23,16 @@ public interface FuncionarioAPI {
     // TODO Criar um response para retornar só o funcionario (Necessário adicionar idEndereco ao funcionario)
     FuncionarioCriadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
 
-    @PatchMapping("/{idFuncionario}")
+    @PatchMapping("/editafuncionario/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(summary = "Altera Funcionário")
     void patchAlteraFuncionario(@Valid @RequestBody AlteraFuncionarioRequest alteraFuncionarioRequest,
                                 @PathVariable UUID idFuncionario);
 
     // TODO Criar patch para alterar endereco do funcionario
+
+    @DeleteMapping("/deletafuncionario/{idFuncionario}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @Operation(summary = "Deleta Funcionário")
+    void deleteDeletaFuncionario(@PathVariable UUID idFuncionario);
 }
