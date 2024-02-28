@@ -40,7 +40,6 @@ public class Funcionario {
         this.designacao = funcionarioNovoRequest.getDesignacao();
         this.salario = funcionarioNovoRequest.getSalario();
         this.telefone = funcionarioNovoRequest.getTelefone();
-        // TODO Impementar enderecoRequest
-        // this.endereco = enderecoRequest.getEndereco();
+        this.endereco = new Endereco(funcionarioNovoRequest.getEnderecoNovo());
     }
 }
