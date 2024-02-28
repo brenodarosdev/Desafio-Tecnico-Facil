@@ -35,6 +35,6 @@ public class FuncionarioApplicationService implements FuncionarioService{
         // TODO BuscaEnderecoPorId
         Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
         log.info("[finaliza] FuncionarioApplicationService - buscaFuncionarioPorId");
-        return null;
+        return new FuncionarioCriadoResponse(funcionario);
     }
 }
