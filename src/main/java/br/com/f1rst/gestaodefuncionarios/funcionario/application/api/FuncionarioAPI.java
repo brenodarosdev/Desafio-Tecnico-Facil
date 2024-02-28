@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @Tag(name = "Funcionário")
 @RequestMapping("/funcionario")
@@ -14,4 +16,10 @@ public interface FuncionarioAPI {
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(summary = "Cria novo funcionário")
     FuncionarioCriadoResponse postNovoFuncionario(@Valid @RequestBody FuncionarioNovoRequest funcionarioNovoRequest);
+
+    @GetMapping("/{idFunciona" +
+            "rio}")
+    @ResponseStatus(code = HttpStatus.OK)
+    @Operation(summary = "Busca Funcionário por ID")
+    FuncionarioCriadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
 }
