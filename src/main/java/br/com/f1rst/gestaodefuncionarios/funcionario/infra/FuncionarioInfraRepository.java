@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Repository
 @Log4j2
@@ -18,5 +20,12 @@ public class FuncionarioInfraRepository implements FuncionarioRepository {
         funcionarioSpringDataMongoDBRepository.save(funcionario);
         log.info("[finaliza] FuncionarioInfraRepository - salva");
         return funcionario;
+    }
+
+    @Override
+    public Funcionario funcionarioPorId(UUID idFuncionario) {
+        log.info("[inicia] FuncionarioInfraRepository - funcionarioPorId");
+        log.info("[finaliza] FuncionarioInfraRepository - funcionarioPorId");
+        return null;
     }
 }
