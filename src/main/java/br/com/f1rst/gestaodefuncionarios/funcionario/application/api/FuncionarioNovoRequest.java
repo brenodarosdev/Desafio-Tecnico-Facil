@@ -1,6 +1,6 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.api;
 
-import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoRequest;
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoNovoRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -21,5 +21,5 @@ public class FuncionarioNovoRequest {
     @Size(min = 10, max = 11, message = "O campo telefone deve ter entre 10 e 11 caracteres")
     private String telefone;
     @Valid
-    private EnderecoRequest endereco;
+    private EnderecoNovoRequest enderecoNovo;
 }

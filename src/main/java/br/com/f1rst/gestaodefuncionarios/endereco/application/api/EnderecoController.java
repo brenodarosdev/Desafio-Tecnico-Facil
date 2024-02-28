@@ -12,7 +12,7 @@ public class EnderecoController implements EnderecoAPI {
     private final EnderecoService enderecoService;
 
     @Override
-    public EnderecoCriadoResponse postNovoEndereco(EnderecoRequest novoEndereco) {
+    public EnderecoCriadoResponse postNovoEndereco(EnderecoNovoRequest novoEndereco) {
         log.info("[inicia] EnderecoController - postNovoEndereco");
         EnderecoCriadoResponse enderecoCriado = enderecoService.criaNovoEndereco(novoEndereco);
         log.info("[finaliza] EnderecoController - postNovoEndereco");

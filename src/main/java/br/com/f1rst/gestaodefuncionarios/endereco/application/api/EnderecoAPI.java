@@ -1,17 +1,14 @@
 package br.com.f1rst.gestaodefuncionarios.endereco.application.api;
 
 
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/funcionario/endereco")
 public interface EnderecoAPI {
-
-    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    @Operation(summary = "Cria novo Endereço")
-    EnderecoCriadoResponse postNovoEndereco(@Valid @RequestBody EnderecoRequest novoEndereco);
+    EnderecoCriadoResponse postNovoEndereco(@Valid @RequestBody EnderecoNovoRequest novoEndereco);
 }

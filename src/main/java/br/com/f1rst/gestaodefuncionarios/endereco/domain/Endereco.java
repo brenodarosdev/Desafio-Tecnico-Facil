@@ -1,6 +1,6 @@
 package br.com.f1rst.gestaodefuncionarios.endereco.domain;
 
-import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoRequest;
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoNovoRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -32,13 +32,13 @@ public class Endereco {
     @NotBlank(message = "O campo numeroDaCasa não pode estar em branco")
     private String numeroDaCasa;
 
-    public Endereco(EnderecoRequest novoEnderecoRequest) {
+    public Endereco(EnderecoNovoRequest enderecoNovoRequest) {
         this.idEndereco = UUID.randomUUID();
-        this.cep = novoEnderecoRequest.getCep();
-        this.estadoBrasileiro = novoEnderecoRequest.getEstadoBrasileiro();
-        this.cidade = novoEnderecoRequest.getCidade();
-        this.bairro = novoEnderecoRequest.getBairro();
-        this.rua = novoEnderecoRequest.getRua();
-        this.numeroDaCasa = novoEnderecoRequest.getNumeroDaCasa();
+        this.cep = enderecoNovoRequest.getCep();
+        this.estadoBrasileiro = enderecoNovoRequest.getEstadoBrasileiro();
+        this.cidade = enderecoNovoRequest.getCidade();
+        this.bairro = enderecoNovoRequest.getBairro();
+        this.rua = enderecoNovoRequest.getRua();
+        this.numeroDaCasa = enderecoNovoRequest.getNumeroDaCasa();
     }
 }
