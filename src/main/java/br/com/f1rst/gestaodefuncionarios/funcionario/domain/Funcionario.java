@@ -1,6 +1,7 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.domain;
 
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.AlteraFuncionarioRequest;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -42,5 +43,12 @@ public class Funcionario {
         this.salario = funcionarioNovoRequest.getSalario();
         this.telefone = funcionarioNovoRequest.getTelefone();
         this.endereco = new Endereco(funcionarioNovoRequest.getEnderecoNovo());
+    }
+
+    public void alteraFuncionario(AlteraFuncionarioRequest alteraFuncionarioRequest) {
+        this.nomeCompleto = alteraFuncionarioRequest.getNomeCompleto();
+        this.designacao = alteraFuncionarioRequest.getDesignacao();
+        this.salario = alteraFuncionarioRequest.getSalario();
+        this.telefone = alteraFuncionarioRequest.getTelefone();
     }
 }
