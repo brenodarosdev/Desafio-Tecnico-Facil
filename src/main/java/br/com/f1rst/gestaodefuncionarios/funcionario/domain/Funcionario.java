@@ -1,6 +1,5 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.domain;
 
-import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.AlteraFuncionarioRequest;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
 import jakarta.validation.constraints.DecimalMin;
@@ -11,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -23,6 +21,8 @@ import java.util.UUID;
 public class Funcionario {
     @Id
     private UUID idFuncionario;
+    @Indexed
+    private UUID idEndereco;
     @NotBlank(message = "O campo nomeCompleto não pode estar em branco")
     private String nomeCompleto;
     @NotBlank(message = "O campo designacao não pode estar em branco")
@@ -33,20 +33,14 @@ public class Funcionario {
     @Size(min = 10, max = 11, message = "O campo telefone deve ter entre 10 e 11 caracteres")
     @Indexed(unique = true)
     private String telefone;
-    @DBRef
-    private Endereco endereco;
-    @Id
-    @Indexed
-    private UUID idEndereco;
 
-    public Funcionario(FuncionarioNovoRequest funcionarioNovoRequest) {
+    public Funcionario(FuncionarioNovoRequest funcionarioNovoRequest, UUID idEndereco) {
         this.idFuncionario = UUID.randomUUID();
+        this.idEndereco = idEndereco;
         this.nomeCompleto = funcionarioNovoRequest.getNomeCompleto();
         this.designacao = funcionarioNovoRequest.getDesignacao();
         this.salario = funcionarioNovoRequest.getSalario();
         this.telefone = funcionarioNovoRequest.getTelefone();
-        this.endereco = new Endereco(funcionarioNovoRequest.getEnderecoNovo());
-        this.idEndereco = endereco.getIdEndereco();
     }
 
     public void alteraFuncionario(AlteraFuncionarioRequest alteraFuncionarioRequest) {
