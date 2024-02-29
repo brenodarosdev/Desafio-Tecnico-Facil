@@ -7,4 +7,5 @@ import java.util.UUID;
 public interface EnderecoRepository {
     Endereco salva(Endereco endereco);
     Endereco enderecoPorId(UUID idEndereco);
+    void deletaEnderecoPorId(UUID idEndereco);
 }

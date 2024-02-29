@@ -30,4 +30,10 @@ public class EnderecoInfraRepository implements EnderecoRepository {
         log.info("[finaliza] EnderecoInfraRepository - enderecoPorId");
         return endereco;
     }
+
+    @Override
+    public void deletaEnderecoPorId(UUID idEndereco) {
+        log.info("[inicia] EnderecoInfraRepository - deletaEnderecoPorId");
+        log.info("[finaliza] EnderecoInfraRepository - deletaEnderecoPorId");
+    }
 }
