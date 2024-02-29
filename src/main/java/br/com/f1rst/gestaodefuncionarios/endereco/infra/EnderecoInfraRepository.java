@@ -25,7 +25,9 @@ public class EnderecoInfraRepository implements EnderecoRepository {
     @Override
     public Endereco enderecoPorId(UUID idEndereco) {
         log.info("[inicia] EnderecoInfraRepository - enderecoPorId");
+        Endereco endereco = enderecoSpringDataMongoDBRepository.findById(idEndereco)
+                        .orElseThrow(() -> new RuntimeException("Endereço não encontrado!"));
         log.info("[finaliza] EnderecoInfraRepository - enderecoPorId");
-        return null;
+        return endereco;
     }
 }
