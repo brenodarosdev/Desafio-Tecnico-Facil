@@ -26,8 +26,8 @@ public class FuncionarioApplicationService implements FuncionarioService{
     public FuncionarioCriadoResponse criaNovoFuncionario(FuncionarioNovoRequest funcionarioNovoRequest) {
         log.info("[inicia] FuncionarioApplicationService - criaNovoFuncionario");
         Endereco endereco = enderecoRepository.salva(new Endereco(funcionarioNovoRequest.getEnderecoNovo()));
-        Funcionario funcionario = new Funcionario(funcionarioNovoRequest, endereco.getIdEndereco());
-        funcionarioRepository.salva(funcionario);
+        Funcionario funcionario = funcionarioRepository.salva(new Funcionario(funcionarioNovoRequest,
+                endereco.getIdEndereco()));
         log.info("[finaliza] FuncionarioApplicationService - criaNovoFuncionario");
         return new FuncionarioCriadoResponse(funcionario, endereco);
     }
@@ -52,8 +52,10 @@ public class FuncionarioApplicationService implements FuncionarioService{
     @Override
     public void deletaFuncionario(UUID idFuncionario) {
         log.info("[inicia] FuncionarioApplicationService - deletaFuncionario");
-        funcionarioRepository.funcionarioPorId(idFuncionario);
-        // TODO Deletar endereco
+        Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
+        UUID idEndereco = funcionario.getIdEndereco();
+        enderecoRepository.enderecoPorId(idEndereco);
+        enderecoRepository.deletaEnderecoPorId(idEndereco);
         funcionarioRepository.deletaFuncionarioPorId(idFuncionario);
         log.info("[finaliza] FuncionarioApplicationService - deletaFuncionario");
     }
