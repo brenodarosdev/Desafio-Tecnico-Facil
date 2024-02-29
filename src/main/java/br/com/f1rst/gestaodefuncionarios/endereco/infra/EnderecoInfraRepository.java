@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Repository
 @Log4j2
@@ -18,5 +20,12 @@ public class EnderecoInfraRepository implements EnderecoRepository {
         enderecoSpringDataMongoDBRepository.save(endereco);
         log.info("[finaliza] EnderecoInfraRepository - salva");
         return endereco;
+    }
+
+    @Override
+    public Endereco enderecoPorId(UUID idEndereco) {
+        log.info("[inicia] EnderecoInfraRepository - enderecoPorId");
+        log.info("[finaliza] EnderecoInfraRepository - enderecoPorId");
+        return null;
     }
 }

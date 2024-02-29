@@ -26,7 +26,8 @@ public class EnderecoApplicationService implements EnderecoService {
 
     public EnderecoCriadoResponse buscaEndercoPorId(UUID idEndereco) {
         log.info("[inicia] EnderecoApplicationService - buscaEndercoPorId");
+        Endereco endereco = enderecoRepository.enderecoPorId(idEndereco);
         log.info("[finaliza] EnderecoApplicationService - buscaEndercoPorId");
-        return null;
+        return new EnderecoCriadoResponse(endereco);
     }
 }
