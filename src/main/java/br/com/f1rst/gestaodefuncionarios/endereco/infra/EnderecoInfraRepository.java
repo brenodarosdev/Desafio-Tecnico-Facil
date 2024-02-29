@@ -34,6 +34,7 @@ public class EnderecoInfraRepository implements EnderecoRepository {
     @Override
     public void deletaEnderecoPorId(UUID idEndereco) {
         log.info("[inicia] EnderecoInfraRepository - deletaEnderecoPorId");
+        enderecoSpringDataMongoDBRepository.deleteById(idEndereco);
         log.info("[finaliza] EnderecoInfraRepository - deletaEnderecoPorId");
     }
 }
