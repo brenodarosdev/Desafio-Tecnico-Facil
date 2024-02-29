@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 @Log4j2
@@ -20,5 +22,11 @@ public class EnderecoApplicationService implements EnderecoService {
         Endereco endereco =  enderecoRepository.salva(new Endereco(enderecoNovoRequest));
         log.info("[finaliza] EnderecoApplicationService - criaNovoEndereco");
         return new EnderecoCriadoResponse(endereco);
+    }
+
+    public EnderecoCriadoResponse buscaEndercoPorId(UUID idEndereco) {
+        log.info("[inicia] EnderecoApplicationService - buscaEndercoPorId");
+        log.info("[finaliza] EnderecoApplicationService - buscaEndercoPorId");
+        return null;
     }
 }
