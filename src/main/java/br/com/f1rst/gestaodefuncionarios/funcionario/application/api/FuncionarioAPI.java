@@ -21,7 +21,7 @@ public interface FuncionarioAPI {
     @ResponseStatus(code = HttpStatus.OK)
     @Operation(summary = "Busca Funcionário por ID")
     // TODO Criar um response para retornar só o funcionario (Necessário adicionar idEndereco ao funcionario)
-    FuncionarioCriadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
+    FuncionarioDetalhadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
 
     @PatchMapping("/editafuncionario/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)

@@ -4,6 +4,7 @@ import br.com.f1rst.gestaodefuncionarios.endereco.application.repositrory.Endere
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.AlteraFuncionarioRequest;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioCriadoResponse;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioDetalhadoResponse;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.repository.FuncionarioRepository;
 import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
@@ -31,12 +32,11 @@ public class FuncionarioApplicationService implements FuncionarioService{
     }
 
     @Override
-    public FuncionarioCriadoResponse buscaFuncionarioPorId(UUID idFuncionario) {
+    public FuncionarioDetalhadoResponse buscaFuncionarioPorId(UUID idFuncionario) {
         log.info("[inicia] FuncionarioApplicationService - buscaFuncionarioPorId");
-        // TODO BuscaEnderecoPorId
         Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
         log.info("[finaliza] FuncionarioApplicationService - buscaFuncionarioPorId");
-        return new FuncionarioCriadoResponse(funcionario);
+        return new FuncionarioDetalhadoResponse(funcionario);
     }
 
     @Override

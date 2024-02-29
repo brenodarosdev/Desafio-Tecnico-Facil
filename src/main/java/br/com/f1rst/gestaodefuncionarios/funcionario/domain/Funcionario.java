@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Document(collection = "Funcionário")
+@Document(collection = "Funcionario")
 public class Funcionario {
     @Id
     private UUID idFuncionario;
