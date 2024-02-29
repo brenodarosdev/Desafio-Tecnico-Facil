@@ -10,6 +10,7 @@ import java.util.UUID;
 @Value
 public class FuncionarioCriadoResponse {
     private UUID idFuncionario;
+    private UUID idEndereco;
     private String nomeCompleto;
     private String designacao;
     private BigDecimal salario;
@@ -18,6 +19,7 @@ public class FuncionarioCriadoResponse {
 
     public FuncionarioCriadoResponse(Funcionario funcionario) {
         this.idFuncionario = funcionario.getIdFuncionario();
+        this.idEndereco = funcionario.getIdEndereco();
         this.nomeCompleto = funcionario.getNomeCompleto();
         this.designacao = funcionario.getDesignacao();
         this.salario = funcionario.getSalario();

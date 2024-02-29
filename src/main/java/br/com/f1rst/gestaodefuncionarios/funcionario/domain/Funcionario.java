@@ -35,6 +35,8 @@ public class Funcionario {
     private String telefone;
     @DBRef
     private Endereco endereco;
+    @Indexed
+    private UUID idEndereco;
 
     public Funcionario(FuncionarioNovoRequest funcionarioNovoRequest) {
         this.idFuncionario = UUID.randomUUID();
@@ -43,6 +45,7 @@ public class Funcionario {
         this.salario = funcionarioNovoRequest.getSalario();
         this.telefone = funcionarioNovoRequest.getTelefone();
         this.endereco = new Endereco(funcionarioNovoRequest.getEnderecoNovo());
+        this.idEndereco = endereco.getIdEndereco();
     }
 
     public void alteraFuncionario(AlteraFuncionarioRequest alteraFuncionarioRequest) {
