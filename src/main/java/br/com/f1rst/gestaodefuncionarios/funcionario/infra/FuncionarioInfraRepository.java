@@ -26,7 +26,7 @@ public class FuncionarioInfraRepository implements FuncionarioRepository {
     public Funcionario funcionarioPorId(UUID idFuncionario) {
         log.info("[inicia] FuncionarioInfraRepository - funcionarioPorId");
         // TODO Adicionar tratamento de exceção (Handler)
-        Funcionario funcionario = funcionarioSpringDataMongoDBRepository.findById(idFuncionario)
+        Funcionario funcionario = funcionarioSpringDataMongoDBRepository.findByIdFuncionario(idFuncionario)
                 .orElseThrow(() -> new RuntimeException("Funcionário não encontrado!"));
         log.info("[finaliza] FuncionarioInfraRepository - funcionarioPorId");
         return funcionario;

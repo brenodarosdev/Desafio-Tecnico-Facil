@@ -10,3 +10,4 @@ spring:
   data:
     mongodb:
       uri: ${MONGO_DB_URI:mongodb+srv://dev:root@desenvolvimento.cljnasy.mongodb.net/desenvolvimento?retryWrites=true&w=majority}
+      auto-index-creation: true

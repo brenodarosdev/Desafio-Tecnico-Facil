@@ -35,6 +35,7 @@ public class Funcionario {
     private String telefone;
     @DBRef
     private Endereco endereco;
+    @Id
     @Indexed
     private UUID idEndereco;
 

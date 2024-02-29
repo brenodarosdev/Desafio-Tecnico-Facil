@@ -6,6 +6,7 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Value;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.math.BigDecimal;
@@ -25,6 +26,7 @@ public class FuncionarioNovoRequest {
     private String telefone;
     @Valid
     private EnderecoNovoRequest enderecoNovo;
+    @Id
     @Indexed
     private UUID idEndereco;
 }
