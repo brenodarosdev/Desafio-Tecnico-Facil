@@ -41,4 +41,13 @@ public class Endereco {
         this.rua = enderecoNovoRequest.getRua();
         this.numeroDaCasa = enderecoNovoRequest.getNumeroDaCasa();
     }
+
+    public void alteraEndereco(EnderecoNovoRequest alteraEnderecoRequest) {
+        this.cep = alteraEnderecoRequest.getCep();
+        this.estadoBrasileiro = alteraEnderecoRequest.getEstadoBrasileiro();
+        this.cidade = alteraEnderecoRequest.getCidade();
+        this.bairro = alteraEnderecoRequest.getBairro();
+        this.rua = alteraEnderecoRequest.getRua();
+        this.numeroDaCasa = alteraEnderecoRequest.getNumeroDaCasa();
+    }
 }

@@ -64,6 +64,10 @@ public class FuncionarioApplicationService implements FuncionarioService{
     @Override
     public void alteraEnderecoPorIdDoFuncionario(EnderecoNovoRequest alteraEnderecoRequest, UUID idFuncionario) {
         log.info("[inicia] FuncionarioApplicationService - alteraEnderecoPorIdDoFuncionario");
+        Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
+        Endereco endereco = enderecoRepository.enderecoPorId(funcionario.getIdEndereco());
+        endereco.alteraEndereco(alteraEnderecoRequest);
+        enderecoRepository.salva(endereco);
         log.info("[finaliza] FuncionarioApplicationService - alteraEnderecoPorIdDoFuncionario");
     }
 
