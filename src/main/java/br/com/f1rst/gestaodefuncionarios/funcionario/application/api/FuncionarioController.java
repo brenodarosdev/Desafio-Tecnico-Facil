@@ -33,8 +33,9 @@ public class FuncionarioController implements FuncionarioAPI {
     @Override
     public EnderecoCriadoResponse getBuscaEnderecoPorIdDoFuncionario(UUID idFuncionario) {
         log.info("[inicia] FuncionarioController - getBuscaEnderecoPorIdDoFuncionario");
+        EnderecoCriadoResponse enderecoCriadoResponse = funcionarioService.buscaEnderecoPorIdDoFuncionario(idFuncionario);
         log.info("[finaliza] FuncionarioController - getBuscaEnderecoPorIdDoFuncionario");
-        return null;
+        return enderecoCriadoResponse;
     }
 
     @Override
