@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface EnderecoSpringDataMongoDBRepository extends MongoRepository<Endereco, UUID> {
     Optional<Endereco> findByIdEndereco(UUID idEndereco);
+    void deleteByIdEndereco(UUID idEndereco);
 }

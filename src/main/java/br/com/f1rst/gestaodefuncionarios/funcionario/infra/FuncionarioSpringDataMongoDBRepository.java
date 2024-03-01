@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface FuncionarioSpringDataMongoDBRepository extends MongoRepository<Funcionario, UUID> {
     Optional<Funcionario> findByIdFuncionario(UUID idFuncionario);
+    void deleteByIdFuncionario(UUID idFuncionario);
 }

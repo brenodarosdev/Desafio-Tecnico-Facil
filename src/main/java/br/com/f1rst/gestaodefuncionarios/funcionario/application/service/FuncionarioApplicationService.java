@@ -1,13 +1,9 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.service;
 
-import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoCriadoResponse;
-import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoNovoRequest;
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.*;
 import br.com.f1rst.gestaodefuncionarios.endereco.application.repositrory.EnderecoRepository;
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.AlteraFuncionarioRequest;
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioCriadoResponse;
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioDetalhadoResponse;
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.*;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.repository.FuncionarioRepository;
 import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +33,6 @@ public class FuncionarioApplicationService implements FuncionarioService{
     @Override
     public FuncionarioDetalhadoResponse buscaFuncionarioPorId(UUID idFuncionario) {
         log.info("[inicia] FuncionarioApplicationService - buscaFuncionarioPorId");
-        funcionarioRepository.funcionarioPorId(idFuncionario);
         Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
         log.info("[finaliza] FuncionarioApplicationService - buscaFuncionarioPorId");
         return new FuncionarioDetalhadoResponse(funcionario);

@@ -22,7 +22,6 @@ public interface FuncionarioAPI {
     @GetMapping("/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.OK)
     @Operation(summary = "Busca Funcionário por ID")
-    // TODO Criar um response para retornar só o funcionario (Necessário adicionar idEndereco ao funcionario)
     FuncionarioDetalhadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
 
     @GetMapping("/{idFuncionario}/endereco")
