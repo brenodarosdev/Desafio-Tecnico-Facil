@@ -1,5 +1,6 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.api;
 
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoCriadoResponse;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -27,6 +28,13 @@ public class FuncionarioController implements FuncionarioAPI {
         FuncionarioDetalhadoResponse funcionarioResponse = funcionarioService.buscaFuncionarioPorId(idFuncionario);
         log.info("[finaliza] FuncionarioController - getBuscaFuncionarioPorId");
         return funcionarioResponse;
+    }
+
+    @Override
+    public EnderecoCriadoResponse getBuscaEnderecoPorIdDoFuncionario(UUID idFuncionario) {
+        log.info("[inicia] FuncionarioController - getBuscaEnderecoPorIdDoFuncionario");
+        log.info("[finaliza] FuncionarioController - getBuscaEnderecoPorIdDoFuncionario");
+        return null;
     }
 
     @Override

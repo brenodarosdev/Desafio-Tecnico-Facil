@@ -1,5 +1,6 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.api;
 
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoCriadoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -22,6 +23,11 @@ public interface FuncionarioAPI {
     @Operation(summary = "Busca Funcionário por ID")
     // TODO Criar um response para retornar só o funcionario (Necessário adicionar idEndereco ao funcionario)
     FuncionarioDetalhadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
+
+    @GetMapping("/{idFuncionario}/endereco")
+    @ResponseStatus(code = HttpStatus.OK)
+    @Operation(summary = "Busca Endereço por ID do Funcionário")
+    EnderecoCriadoResponse getBuscaEnderecoPorIdDoFuncionario(@PathVariable UUID idFuncionario);
 
     @PatchMapping("/editafuncionario/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
