@@ -2,8 +2,10 @@ package br.com.f1rst.gestaodefuncionarios.funcionario.infra;
 
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.repository.FuncionarioRepository;
 import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
+import br.com.f1rst.gestaodefuncionarios.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -25,9 +27,8 @@ public class FuncionarioInfraRepository implements FuncionarioRepository {
     @Override
     public Funcionario funcionarioPorId(UUID idFuncionario) {
         log.info("[inicia] FuncionarioInfraRepository - funcionarioPorId");
-        // TODO Adicionar tratamento de exceção (Handler)
         Funcionario funcionario = funcionarioSpringDataMongoDBRepository.findByIdFuncionario(idFuncionario)
-                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado!"));
+                .orElseThrow(() -> APIException.build(HttpStatus.BAD_REQUEST, "Funcionário não encontrado!"));
         log.info("[finaliza] FuncionarioInfraRepository - funcionarioPorId");
         return funcionario;
     }
