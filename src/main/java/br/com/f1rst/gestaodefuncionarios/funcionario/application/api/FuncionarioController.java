@@ -49,6 +49,7 @@ public class FuncionarioController implements FuncionarioAPI {
     @Override
     public void patchAlteraEnderecoPorIdDoFuncionario(EnderecoNovoRequest alteraEnderecoRequest, UUID idFuncionario) {
         log.info("[inicia] FuncionarioController - patchAlteraEnderecoPorIdDoFuncionario");
+        funcionarioService.alteraEnderecoPorIdDoFuncionario(alteraEnderecoRequest, idFuncionario);
         log.info("[finaliza] FuncionarioController - patchAlteraEnderecoPorIdDoFuncionario");
     }
 

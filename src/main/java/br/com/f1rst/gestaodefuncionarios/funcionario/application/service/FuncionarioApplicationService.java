@@ -1,6 +1,7 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.service;
 
 import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoCriadoResponse;
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoNovoRequest;
 import br.com.f1rst.gestaodefuncionarios.endereco.application.repositrory.EnderecoRepository;
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.AlteraFuncionarioRequest;
@@ -58,6 +59,12 @@ public class FuncionarioApplicationService implements FuncionarioService{
         funcionario.alteraFuncionario(alteraFuncionarioRequest);
         funcionarioRepository.salva(funcionario);
         log.info("[finaliza] FuncionarioApplicationService - alteraFuncionario");
+    }
+
+    @Override
+    public void alteraEnderecoPorIdDoFuncionario(EnderecoNovoRequest alteraEnderecoRequest, UUID idFuncionario) {
+        log.info("[inicia] FuncionarioApplicationService - alteraEnderecoPorIdDoFuncionario");
+        log.info("[finaliza] FuncionarioApplicationService - alteraEnderecoPorIdDoFuncionario");
     }
 
     @Override
