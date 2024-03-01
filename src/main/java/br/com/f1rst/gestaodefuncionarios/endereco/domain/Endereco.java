@@ -34,8 +34,8 @@ public class Endereco {
     @NotBlank(message = "O campo numeroDaCasa não pode estar em branco")
     private String numeroDaCasa;
 
-    public Endereco(EnderecoNovoRequest enderecoNovoRequest) {
-        this.idEndereco = UUID.randomUUID();
+    public Endereco(EnderecoNovoRequest enderecoNovoRequest, UUID idEndereco) {
+        this.idEndereco = idEndereco;
         this.cep = enderecoNovoRequest.getCep();
         this.estadoBrasileiro = enderecoNovoRequest.getEstadoBrasileiro();
         this.cidade = enderecoNovoRequest.getCidade();

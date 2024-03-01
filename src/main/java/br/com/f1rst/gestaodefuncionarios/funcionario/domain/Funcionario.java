@@ -34,9 +34,9 @@ public class Funcionario {
     @Indexed(unique = true)
     private String telefone;
 
-    public Funcionario(FuncionarioNovoRequest funcionarioNovoRequest, UUID idEndereco) {
+    public Funcionario(FuncionarioNovoRequest funcionarioNovoRequest) {
         this.idFuncionario = UUID.randomUUID();
-        this.idEndereco = idEndereco;
+        this.idEndereco = UUID.randomUUID();
         this.nomeCompleto = funcionarioNovoRequest.getNomeCompleto();
         this.designacao = funcionarioNovoRequest.getDesignacao();
         this.salario = funcionarioNovoRequest.getSalario();

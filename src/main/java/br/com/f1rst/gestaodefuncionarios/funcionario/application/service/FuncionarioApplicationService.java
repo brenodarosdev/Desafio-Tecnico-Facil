@@ -23,9 +23,9 @@ public class FuncionarioApplicationService implements FuncionarioService{
     @Override
     public FuncionarioCriadoResponse criaNovoFuncionario(FuncionarioNovoRequest funcionarioNovoRequest) {
         log.info("[inicia] FuncionarioApplicationService - criaNovoFuncionario");
-        Endereco endereco = enderecoRepository.salva(new Endereco(funcionarioNovoRequest.getEnderecoNovo()));
-        Funcionario funcionario = funcionarioRepository.salva(new Funcionario(funcionarioNovoRequest,
-                endereco.getIdEndereco()));
+        Funcionario funcionario = funcionarioRepository.salva(new Funcionario(funcionarioNovoRequest));
+        Endereco endereco = enderecoRepository.salva(new Endereco(funcionarioNovoRequest.getEnderecoNovo(),
+                funcionario.getIdEndereco()));
         log.info("[finaliza] FuncionarioApplicationService - criaNovoFuncionario");
         return new FuncionarioCriadoResponse(funcionario, endereco);
     }
