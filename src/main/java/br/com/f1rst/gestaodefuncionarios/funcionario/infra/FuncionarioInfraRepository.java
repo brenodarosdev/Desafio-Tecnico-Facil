@@ -5,6 +5,7 @@ import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
 import br.com.f1rst.gestaodefuncionarios.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,11 @@ public class FuncionarioInfraRepository implements FuncionarioRepository {
     @Override
     public Funcionario salva(Funcionario funcionario) {
         log.info("[inicia] FuncionarioInfraRepository - salva");
-        funcionarioSpringDataMongoDBRepository.save(funcionario);
+        try {
+            funcionarioSpringDataMongoDBRepository.save(funcionario);
+        } catch(DataIntegrityViolationException e) {
+            throw APIException.build(HttpStatus.BAD_REQUEST, "Já existe um funcionário cadastrado com este telefone");
+        }
         log.info("[finaliza] FuncionarioInfraRepository - salva");
         return funcionario;
     }
