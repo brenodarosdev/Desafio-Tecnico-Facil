@@ -23,7 +23,7 @@ public class FuncionarioInfraRepository implements FuncionarioRepository {
         try {
             funcionarioSpringDataMongoDBRepository.save(funcionario);
         } catch(DataIntegrityViolationException e) {
-            throw APIException.build(HttpStatus.BAD_REQUEST, "Já existe um funcionário cadastrado com este telefone");
+            throw APIException.build(HttpStatus.BAD_REQUEST, "Já existe um funcionário cadastrado com este telefone!");
         }
         log.info("[finaliza] FuncionarioInfraRepository - salva");
         return funcionario;
