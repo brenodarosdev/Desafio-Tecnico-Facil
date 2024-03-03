@@ -8,15 +8,17 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Document(collection = "Endereço")
+@Document(collection = "Endereco")
 public class Endereco {
     @Id
+    @Indexed
     private UUID idEndereco;
     @NotBlank(message = "O campo cep não pode estar em branco")
     @Size(min = 8, max = 8, message = "O cep deve ter 8 caracteres")
@@ -32,13 +34,22 @@ public class Endereco {
     @NotBlank(message = "O campo numeroDaCasa não pode estar em branco")
     private String numeroDaCasa;
 
-    public Endereco(EnderecoNovoRequest enderecoNovoRequest) {
-        this.idEndereco = UUID.randomUUID();
+    public Endereco(EnderecoNovoRequest enderecoNovoRequest, UUID idEndereco) {
+        this.idEndereco = idEndereco;
         this.cep = enderecoNovoRequest.getCep();
         this.estadoBrasileiro = enderecoNovoRequest.getEstadoBrasileiro();
         this.cidade = enderecoNovoRequest.getCidade();
         this.bairro = enderecoNovoRequest.getBairro();
         this.rua = enderecoNovoRequest.getRua();
         this.numeroDaCasa = enderecoNovoRequest.getNumeroDaCasa();
+    }
+
+    public void alteraEndereco(EnderecoNovoRequest alteraEnderecoRequest) {
+        this.cep = alteraEnderecoRequest.getCep();
+        this.estadoBrasileiro = alteraEnderecoRequest.getEstadoBrasileiro();
+        this.cidade = alteraEnderecoRequest.getCidade();
+        this.bairro = alteraEnderecoRequest.getBairro();
+        this.rua = alteraEnderecoRequest.getRua();
+        this.numeroDaCasa = alteraEnderecoRequest.getNumeroDaCasa();
     }
 }

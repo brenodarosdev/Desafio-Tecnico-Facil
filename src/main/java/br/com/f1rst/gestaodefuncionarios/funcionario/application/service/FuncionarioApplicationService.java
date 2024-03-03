@@ -1,10 +1,9 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.service;
 
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.*;
 import br.com.f1rst.gestaodefuncionarios.endereco.application.repositrory.EnderecoRepository;
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.AlteraFuncionarioRequest;
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioCriadoResponse;
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.*;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.repository.FuncionarioRepository;
 import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
 import lombok.RequiredArgsConstructor;
@@ -24,19 +23,28 @@ public class FuncionarioApplicationService implements FuncionarioService{
     @Override
     public FuncionarioCriadoResponse criaNovoFuncionario(FuncionarioNovoRequest funcionarioNovoRequest) {
         log.info("[inicia] FuncionarioApplicationService - criaNovoFuncionario");
-        enderecoRepository.salva(new Endereco(funcionarioNovoRequest.getEnderecoNovo()));
         Funcionario funcionario = funcionarioRepository.salva(new Funcionario(funcionarioNovoRequest));
+        Endereco endereco = enderecoRepository.salva(new Endereco(funcionarioNovoRequest.getEnderecoNovo(),
+                funcionario.getIdEndereco()));
         log.info("[finaliza] FuncionarioApplicationService - criaNovoFuncionario");
-        return new FuncionarioCriadoResponse(funcionario);
+        return new FuncionarioCriadoResponse(funcionario, endereco);
     }
 
     @Override
-    public FuncionarioCriadoResponse buscaFuncionarioPorId(UUID idFuncionario) {
+    public FuncionarioDetalhadoResponse buscaFuncionarioPorId(UUID idFuncionario) {
         log.info("[inicia] FuncionarioApplicationService - buscaFuncionarioPorId");
-        // TODO BuscaEnderecoPorId
         Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
         log.info("[finaliza] FuncionarioApplicationService - buscaFuncionarioPorId");
-        return new FuncionarioCriadoResponse(funcionario);
+        return new FuncionarioDetalhadoResponse(funcionario);
+    }
+
+    @Override
+    public EnderecoCriadoResponse buscaEnderecoPorIdDoFuncionario(UUID idFuncionario) {
+        log.info("[inicia] FuncionarioApplicationService - buscaEnderecoPorIdDoFuncionario");
+        Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
+        Endereco endereco = enderecoRepository.enderecoPorId(funcionario.getIdEndereco());
+        log.info("[finaliza] FuncionarioApplicationService - buscaEnderecoPorIdDoFuncionario");
+        return new EnderecoCriadoResponse(endereco);
     }
 
     @Override
@@ -49,10 +57,22 @@ public class FuncionarioApplicationService implements FuncionarioService{
     }
 
     @Override
+    public void alteraEnderecoPorIdDoFuncionario(EnderecoNovoRequest alteraEnderecoRequest, UUID idFuncionario) {
+        log.info("[inicia] FuncionarioApplicationService - alteraEnderecoPorIdDoFuncionario");
+        Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
+        Endereco endereco = enderecoRepository.enderecoPorId(funcionario.getIdEndereco());
+        endereco.alteraEndereco(alteraEnderecoRequest);
+        enderecoRepository.salva(endereco);
+        log.info("[finaliza] FuncionarioApplicationService - alteraEnderecoPorIdDoFuncionario");
+    }
+
+    @Override
     public void deletaFuncionario(UUID idFuncionario) {
         log.info("[inicia] FuncionarioApplicationService - deletaFuncionario");
-        funcionarioRepository.funcionarioPorId(idFuncionario);
-        // TODO Deletar endereco
+        Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
+        UUID idEndereco = funcionario.getIdEndereco();
+        enderecoRepository.enderecoPorId(idEndereco);
+        enderecoRepository.deletaEnderecoPorId(idEndereco);
         funcionarioRepository.deletaFuncionarioPorId(idFuncionario);
         log.info("[finaliza] FuncionarioApplicationService - deletaFuncionario");
     }

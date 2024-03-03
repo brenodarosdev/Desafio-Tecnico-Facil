@@ -2,8 +2,11 @@ package br.com.f1rst.gestaodefuncionarios.funcionario.infra;
 
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.repository.FuncionarioRepository;
 import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
+import br.com.f1rst.gestaodefuncionarios.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -17,7 +20,11 @@ public class FuncionarioInfraRepository implements FuncionarioRepository {
     @Override
     public Funcionario salva(Funcionario funcionario) {
         log.info("[inicia] FuncionarioInfraRepository - salva");
-        funcionarioSpringDataMongoDBRepository.save(funcionario);
+        try {
+            funcionarioSpringDataMongoDBRepository.save(funcionario);
+        } catch(DataIntegrityViolationException e) {
+            throw APIException.build(HttpStatus.BAD_REQUEST, "Já existe um funcionário cadastrado com este telefone!");
+        }
         log.info("[finaliza] FuncionarioInfraRepository - salva");
         return funcionario;
     }
@@ -25,9 +32,8 @@ public class FuncionarioInfraRepository implements FuncionarioRepository {
     @Override
     public Funcionario funcionarioPorId(UUID idFuncionario) {
         log.info("[inicia] FuncionarioInfraRepository - funcionarioPorId");
-        // TODO Adicionar tratamento de exceção (Handler)
-        Funcionario funcionario = funcionarioSpringDataMongoDBRepository.findById(idFuncionario)
-                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado!"));
+        Funcionario funcionario = funcionarioSpringDataMongoDBRepository.findByIdFuncionario(idFuncionario)
+                .orElseThrow(() -> APIException.build(HttpStatus.BAD_REQUEST, "Funcionário não encontrado!"));
         log.info("[finaliza] FuncionarioInfraRepository - funcionarioPorId");
         return funcionario;
     }
@@ -35,7 +41,7 @@ public class FuncionarioInfraRepository implements FuncionarioRepository {
     @Override
     public void deletaFuncionarioPorId(UUID idFuncionario) {
         log.info("[inicia] FuncionarioInfraRepository - deletaFuncionarioPorId");
-        funcionarioSpringDataMongoDBRepository.deleteById(idFuncionario);
+        funcionarioSpringDataMongoDBRepository.deleteByIdFuncionario(idFuncionario);
         log.info("[finaliza] FuncionarioInfraRepository - deletaFuncionarioPorId");
     }
 }

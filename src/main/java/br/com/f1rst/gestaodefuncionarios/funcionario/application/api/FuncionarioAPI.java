@@ -1,5 +1,7 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.api;
 
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoCriadoResponse;
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoNovoRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -20,16 +22,24 @@ public interface FuncionarioAPI {
     @GetMapping("/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.OK)
     @Operation(summary = "Busca Funcionário por ID")
-    // TODO Criar um response para retornar só o funcionario (Necessário adicionar idEndereco ao funcionario)
-    FuncionarioCriadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
+    FuncionarioDetalhadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
 
-    @PatchMapping("/editafuncionario/{idFuncionario}")
+    @GetMapping("/{idFuncionario}/endereco")
+    @ResponseStatus(code = HttpStatus.OK)
+    @Operation(summary = "Busca Endereço por ID do Funcionário")
+    EnderecoCriadoResponse getBuscaEnderecoPorIdDoFuncionario(@PathVariable UUID idFuncionario);
+
+    @PatchMapping("/editaFuncionario/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(summary = "Altera Funcionário")
     void patchAlteraFuncionario(@Valid @RequestBody AlteraFuncionarioRequest alteraFuncionarioRequest,
                                 @PathVariable UUID idFuncionario);
 
-    // TODO Criar patch para alterar endereco do funcionario
+    @PatchMapping("/editaEndereco/{idFuncionario}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @Operation(summary = "Altera Endereco do Funcionário")
+    void patchAlteraEnderecoPorIdDoFuncionario(@Valid @RequestBody EnderecoNovoRequest alteraEnderecoRequest,
+                                               @PathVariable UUID idFuncionario);
 
     @DeleteMapping("/deletafuncionario/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
