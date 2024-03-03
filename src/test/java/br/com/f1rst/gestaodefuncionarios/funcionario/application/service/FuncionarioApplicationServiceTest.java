@@ -4,6 +4,7 @@ import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoNovoRe
 import br.com.f1rst.gestaodefuncionarios.endereco.application.repositrory.EnderecoRepository;
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioCriadoResponse;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioDetalhadoResponse;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.repository.FuncionarioRepository;
 import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
@@ -43,6 +44,18 @@ class FuncionarioApplicationServiceTest {
         //Então - Then
         assertNotNull(funcionarioCriadoResponse);
         assertEquals(FuncionarioCriadoResponse.class, funcionarioCriadoResponse.getClass());
+        assertEquals(Endereco.class, funcionarioCriadoResponse.getEndereco().getClass());
         assertEquals(UUID.class, funcionarioCriadoResponse.getIdFuncionario().getClass());
+        assertEquals(UUID.class, funcionarioCriadoResponse.getIdEndereco().getClass());
+    }
+
+    @Test
+    void deveBuscarFuncionarioPorId(){
+        Funcionario fucionario = FuncionarioCreator.criaFuncionario();
+        UUID idFuncionario = fucionario.getIdFuncionario();
+        when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(fucionario);
+        FuncionarioDetalhadoResponse funcionarioDetalhadoResponse = funcionarioApplicationService.buscaFuncionarioPorId(idFuncionario);
+        verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
+        assertEquals(FuncionarioDetalhadoResponse.class, funcionarioDetalhadoResponse.getClass());
     }
 }
