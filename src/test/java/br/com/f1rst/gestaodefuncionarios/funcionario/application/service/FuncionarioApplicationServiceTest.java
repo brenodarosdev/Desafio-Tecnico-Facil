@@ -20,8 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,7 +41,8 @@ class FuncionarioApplicationServiceTest {
         //Quando - When
         when(funcionarioRepository.salva(any())).thenReturn(new Funcionario(funcionarioNovoRequest));
         when(enderecoRepository.salva(any())).thenReturn(new Endereco(enderecoNovoRequest, funcionario.getIdEndereco()));
-        FuncionarioCriadoResponse funcionarioCriadoResponse = funcionarioApplicationService.criaNovoFuncionario(funcionarioNovoRequest);
+        FuncionarioCriadoResponse funcionarioCriadoResponse = funcionarioApplicationService
+                .criaNovoFuncionario(funcionarioNovoRequest);
         //Então - Then
         assertNotNull(funcionarioCriadoResponse);
         assertEquals(FuncionarioCriadoResponse.class, funcionarioCriadoResponse.getClass());
@@ -58,7 +58,8 @@ class FuncionarioApplicationServiceTest {
         UUID idFuncionario = fucionario.getIdFuncionario();
         //Quando - When
         when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(fucionario);
-        FuncionarioDetalhadoResponse funcionarioDetalhadoResponse = funcionarioApplicationService.buscaFuncionarioPorId(idFuncionario);
+        FuncionarioDetalhadoResponse funcionarioDetalhadoResponse = funcionarioApplicationService
+                .buscaFuncionarioPorId(idFuncionario);
         //Então - Then
         verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
         assertEquals(FuncionarioDetalhadoResponse.class, funcionarioDetalhadoResponse.getClass());
@@ -106,15 +107,33 @@ class FuncionarioApplicationServiceTest {
         UUID idFuncionario = funcionario.getIdFuncionario();
         EnderecoNovoRequest alteraEnderecoRequest = EnderecoCreator.alteraEnderecoPorIdDoFuncionario();
         Endereco endereco = EnderecoCreator.criaEndereco();
-        UUID IdEndereco = funcionario.getIdEndereco();
+        UUID idEndereco = funcionario.getIdEndereco();
         //Quando - When
         when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(funcionario);
-        when(enderecoRepository.enderecoPorId(IdEndereco)).thenReturn(endereco);
+        when(enderecoRepository.enderecoPorId(idEndereco)).thenReturn(endereco);
         when(enderecoRepository.salva(any())).thenReturn(endereco);
         funcionarioApplicationService.alteraEnderecoPorIdDoFuncionario(alteraEnderecoRequest, idFuncionario);
         //Então - Then
         verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
         verify(enderecoRepository, times(1)).enderecoPorId(funcionario.getIdEndereco());
         verify(enderecoRepository, times(1)).salva(endereco);
+    }
+
+    @Test
+    void deveDeletarFuncionario() {
+        //Dado - Given
+        Funcionario funcionario = FuncionarioCreator.criaFuncionario();
+        UUID idFuncionario = funcionario.getIdFuncionario();
+        Endereco endereco = EnderecoCreator.criaEndereco();
+        UUID idEndereco = funcionario.getIdEndereco();
+        //Quando - When
+        when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(funcionario);
+        when(enderecoRepository.enderecoPorId(idEndereco)).thenReturn(endereco);
+        funcionarioApplicationService.deletaFuncionario(funcionario.getIdFuncionario());
+        //Então - Then
+        verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
+        verify(funcionarioRepository, times(1)).deletaFuncionarioPorId(idFuncionario);
+        verify(enderecoRepository, times(1)).enderecoPorId(idEndereco);
+        verify(enderecoRepository, times(1)).deletaEnderecoPorId(idEndereco);
     }
 }
