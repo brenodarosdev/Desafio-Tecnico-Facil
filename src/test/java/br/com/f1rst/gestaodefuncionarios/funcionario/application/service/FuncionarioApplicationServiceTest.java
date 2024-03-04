@@ -98,4 +98,23 @@ class FuncionarioApplicationServiceTest {
         verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
         verify(funcionarioRepository, times(1)).salva(funcionario);
     }
+
+    @Test
+    void deveAlterarEnderecoPorIdDoFuncionario() {
+        //Dado - Given
+        Funcionario funcionario = FuncionarioCreator.criaFuncionario();
+        UUID idFuncionario = funcionario.getIdFuncionario();
+        EnderecoNovoRequest alteraEnderecoRequest = EnderecoCreator.alteraEnderecoPorIdDoFuncionario();
+        Endereco endereco = EnderecoCreator.criaEndereco();
+        UUID IdEndereco = funcionario.getIdEndereco();
+        //Quando - When
+        when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(funcionario);
+        when(enderecoRepository.enderecoPorId(IdEndereco)).thenReturn(endereco);
+        when(enderecoRepository.salva(any())).thenReturn(endereco);
+        funcionarioApplicationService.alteraEnderecoPorIdDoFuncionario(alteraEnderecoRequest, idFuncionario);
+        //Então - Then
+        verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
+        verify(enderecoRepository, times(1)).enderecoPorId(funcionario.getIdEndereco());
+        verify(enderecoRepository, times(1)).salva(endereco);
+    }
 }

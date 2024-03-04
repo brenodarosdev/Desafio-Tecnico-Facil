@@ -25,4 +25,9 @@ public class EnderecoCreator {
         return new EnderecoNovoRequest("12345678", EstadoBrasileiro.BA , "salario",
                 "12345678912", "rua inventada", "134a");
     }
+
+    public static EnderecoNovoRequest alteraEnderecoPorIdDoFuncionario() {
+        return new EnderecoNovoRequest("12345678", EstadoBrasileiro.BA , "salario",
+                "12345678912", "rua inventada", "134a");
+    }
 }
