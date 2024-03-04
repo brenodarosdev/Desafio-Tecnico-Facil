@@ -1,5 +1,6 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.service;
 
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoCriadoResponse;
 import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoNovoRequest;
 import br.com.f1rst.gestaodefuncionarios.endereco.application.repositrory.EnderecoRepository;
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
@@ -50,12 +51,35 @@ class FuncionarioApplicationServiceTest {
     }
 
     @Test
-    void deveBuscarFuncionarioPorId(){
+    void deveBuscarFuncionarioPorId() {
+        //Dado - Given
         Funcionario fucionario = FuncionarioCreator.criaFuncionario();
         UUID idFuncionario = fucionario.getIdFuncionario();
+        //Quando - When
         when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(fucionario);
         FuncionarioDetalhadoResponse funcionarioDetalhadoResponse = funcionarioApplicationService.buscaFuncionarioPorId(idFuncionario);
+        //Então - Then
         verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
         assertEquals(FuncionarioDetalhadoResponse.class, funcionarioDetalhadoResponse.getClass());
+        assertNotNull(funcionarioDetalhadoResponse);
+    }
+
+    @Test
+    void deveBuscarEnderecoPorIdDoFuncionario() {
+        //Dado - Given
+        Funcionario funcionarioCriado = FuncionarioCreator.criaFuncionario();
+        UUID idFuncionario = funcionarioCriado.getIdFuncionario();
+        Endereco enderecoCriado = EnderecoCreator.criaEndereco();
+        UUID idEndereco = enderecoCriado.getIdEndereco();
+        //Quando - When
+        when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(funcionarioCriado);
+        when(enderecoRepository.enderecoPorId(idEndereco)).thenReturn(enderecoCriado);
+        EnderecoCriadoResponse enderecoCriadoResponse = funcionarioApplicationService
+                .buscaEnderecoPorIdDoFuncionario(idFuncionario);
+        //Então - Then
+        verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
+        verify(enderecoRepository, times(1)).enderecoPorId(funcionarioCriado.getIdEndereco());
+        assertEquals(EnderecoCriadoResponse.class, enderecoCriadoResponse.getClass());
+        assertNotNull(enderecoCriadoResponse);
     }
 }
