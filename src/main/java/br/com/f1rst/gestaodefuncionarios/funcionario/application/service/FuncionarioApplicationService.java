@@ -39,12 +39,12 @@ public class FuncionarioApplicationService implements FuncionarioService{
     }
 
     @Override
-    public EnderecoCriadoResponse buscaEnderecoPorIdDoFuncionario(UUID idFuncionario) {
+    public EnderecoDetalhadoResponse buscaEnderecoPorIdDoFuncionario(UUID idFuncionario) {
         log.info("[inicia] FuncionarioApplicationService - buscaEnderecoPorIdDoFuncionario");
         Funcionario funcionario = funcionarioRepository.funcionarioPorId(idFuncionario);
         Endereco endereco = enderecoRepository.enderecoPorId(funcionario.getIdEndereco());
         log.info("[finaliza] FuncionarioApplicationService - buscaEnderecoPorIdDoFuncionario");
-        return new EnderecoCriadoResponse(endereco);
+        return new EnderecoDetalhadoResponse(endereco);
     }
 
     @Override
