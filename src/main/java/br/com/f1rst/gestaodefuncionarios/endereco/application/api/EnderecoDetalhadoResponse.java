@@ -7,7 +7,7 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-public class EnderecoCriadoResponse {
+public class EnderecoDetalhadoResponse {
     private UUID idEndereco;
     private String cep;
     private EstadoBrasileiro estadoBrasileiro;
@@ -16,7 +16,7 @@ public class EnderecoCriadoResponse {
     private String rua;
     private String numeroDaCasa;
 
-    public EnderecoCriadoResponse(Endereco endereco) {
+    public EnderecoDetalhadoResponse(Endereco endereco) {
         this.idEndereco = endereco.getIdEndereco();
         this.cep = endereco.getCep();
         this.estadoBrasileiro = endereco.getEstadoBrasileiro();

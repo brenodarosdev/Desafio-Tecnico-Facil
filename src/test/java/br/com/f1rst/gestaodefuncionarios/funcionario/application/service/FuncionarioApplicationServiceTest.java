@@ -1,9 +1,10 @@
 package br.com.f1rst.gestaodefuncionarios.funcionario.application.service;
 
-import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoCriadoResponse;
+import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoDetalhadoResponse;
 import br.com.f1rst.gestaodefuncionarios.endereco.application.api.EnderecoNovoRequest;
 import br.com.f1rst.gestaodefuncionarios.endereco.application.repositrory.EnderecoRepository;
 import br.com.f1rst.gestaodefuncionarios.endereco.domain.Endereco;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.AlteraFuncionarioRequest;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioCriadoResponse;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioDetalhadoResponse;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
@@ -35,12 +36,12 @@ class FuncionarioApplicationServiceTest {
     @Test
     void deveCriarNovoFuncionario() {
         //Dado - Given
-        Funcionario fucionario = FuncionarioCreator.criaFuncionario();
-        FuncionarioNovoRequest funcionarioNovoRequest = FuncionarioCreator.CriaFuncionarioNovoRequest();
+        Funcionario funcionario = FuncionarioCreator.criaFuncionario();
+        FuncionarioNovoRequest funcionarioNovoRequest = FuncionarioCreator.criaFuncionarioNovoRequest();
         EnderecoNovoRequest enderecoNovoRequest = EnderecoCreator.criaEnderecoNovoRequest();
         //Quando - When
         when(funcionarioRepository.salva(any())).thenReturn(new Funcionario(funcionarioNovoRequest));
-        when(enderecoRepository.salva(any())).thenReturn(new Endereco(enderecoNovoRequest, fucionario.getIdEndereco()));
+        when(enderecoRepository.salva(any())).thenReturn(new Endereco(enderecoNovoRequest, funcionario.getIdEndereco()));
         FuncionarioCriadoResponse funcionarioCriadoResponse = funcionarioApplicationService.criaNovoFuncionario(funcionarioNovoRequest);
         //Então - Then
         assertNotNull(funcionarioCriadoResponse);
@@ -74,12 +75,27 @@ class FuncionarioApplicationServiceTest {
         //Quando - When
         when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(funcionarioCriado);
         when(enderecoRepository.enderecoPorId(idEndereco)).thenReturn(enderecoCriado);
-        EnderecoCriadoResponse enderecoCriadoResponse = funcionarioApplicationService
+        EnderecoDetalhadoResponse enderecoDetalhadoResponse = funcionarioApplicationService
                 .buscaEnderecoPorIdDoFuncionario(idFuncionario);
         //Então - Then
         verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
         verify(enderecoRepository, times(1)).enderecoPorId(funcionarioCriado.getIdEndereco());
-        assertEquals(EnderecoCriadoResponse.class, enderecoCriadoResponse.getClass());
-        assertNotNull(enderecoCriadoResponse);
+        assertEquals(EnderecoDetalhadoResponse.class, enderecoDetalhadoResponse.getClass());
+        assertNotNull(enderecoDetalhadoResponse);
+    }
+
+    @Test
+    void deveAlterarFuncionario() {
+        //Dado - Given
+        AlteraFuncionarioRequest alteraFuncionarioRequest = FuncionarioCreator.alteraFuncionarioRequest();
+        Funcionario funcionario = FuncionarioCreator.criaFuncionario();
+        UUID idFuncionario = funcionario.getIdFuncionario();
+        //Quando - When
+        when(funcionarioRepository.funcionarioPorId(idFuncionario)).thenReturn(funcionario);
+        when(funcionarioRepository.salva(any())).thenReturn(funcionario);
+        funcionarioApplicationService.alteraFuncionario(alteraFuncionarioRequest, idFuncionario);
+        //Então - Then
+        verify(funcionarioRepository, times(1)).funcionarioPorId(idFuncionario);
+        verify(funcionarioRepository, times(1)).salva(funcionario);
     }
 }

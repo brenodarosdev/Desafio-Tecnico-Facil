@@ -1,13 +1,14 @@
 package br.com.f1rst.gestaodefuncionarios.util;
 
-import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioCriadoResponse;
+import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.AlteraFuncionarioRequest;
 import br.com.f1rst.gestaodefuncionarios.funcionario.application.api.FuncionarioNovoRequest;
 import br.com.f1rst.gestaodefuncionarios.funcionario.domain.Funcionario;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static br.com.f1rst.gestaodefuncionarios.util.EnderecoCreator.*;
+import static br.com.f1rst.gestaodefuncionarios.util.EnderecoCreator.criaEnderecoNovoRequest;
+import static br.com.f1rst.gestaodefuncionarios.util.EnderecoCreator.idEndereco1;
 
 public class FuncionarioCreator {
     private static final UUID idFuncionario1 = UUID.fromString("3deb33b6-8a91-41d4-8afb-72f75cfd7780");
@@ -23,16 +24,15 @@ public class FuncionarioCreator {
                 .build();
     }
 
-    public static FuncionarioNovoRequest CriaFuncionarioNovoRequest() {
+    public static FuncionarioNovoRequest criaFuncionarioNovoRequest() {
         BigDecimal salario = new BigDecimal(6000);
-        FuncionarioNovoRequest novoRequest = new FuncionarioNovoRequest("Teste da Silva",
+        return new FuncionarioNovoRequest("Teste da Silva",
                 "TI", salario, "12345678912", criaEnderecoNovoRequest());
-        return novoRequest;
     }
 
-    public static FuncionarioCriadoResponse CriaFucionarioCriadoResponse() {
+    public static AlteraFuncionarioRequest alteraFuncionarioRequest() {
         BigDecimal salario = new BigDecimal(6000);
-        FuncionarioCriadoResponse novoRequest = new FuncionarioCriadoResponse(criaFuncionario(), criaEndereco());
-        return novoRequest;
+        return new AlteraFuncionarioRequest("Teste da Silva", "TI",
+                salario, "12345678912");
     }
 }

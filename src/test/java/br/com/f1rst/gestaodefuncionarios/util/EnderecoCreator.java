@@ -22,8 +22,7 @@ public class EnderecoCreator {
     }
 
     public static EnderecoNovoRequest criaEnderecoNovoRequest() {
-        EnderecoNovoRequest novoRequest = new EnderecoNovoRequest("12345678",
-               EstadoBrasileiro.BA , "salario", "12345678912", "abc", "134");
-        return novoRequest;
+        return new EnderecoNovoRequest("12345678", EstadoBrasileiro.BA , "salario",
+                "12345678912", "rua inventada", "134a");
     }
 }
