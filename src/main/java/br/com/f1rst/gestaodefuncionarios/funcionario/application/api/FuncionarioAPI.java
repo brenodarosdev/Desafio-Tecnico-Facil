@@ -14,17 +14,17 @@ import java.util.UUID;
 @Tag(name = "Funcionário")
 @RequestMapping("/funcionario")
 public interface FuncionarioAPI {
-    @PostMapping
+    @PostMapping("/novoFuncionario")
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(summary = "Cria novo Funcionário")
     FuncionarioCriadoResponse postNovoFuncionario(@Valid @RequestBody FuncionarioNovoRequest funcionarioNovoRequest);
 
-    @GetMapping("/{idFuncionario}")
+    @GetMapping("/buscaFuncionario/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.OK)
     @Operation(summary = "Busca Funcionário por ID")
     FuncionarioDetalhadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
 
-    @GetMapping("/{idFuncionario}/endereco")
+    @GetMapping("/buscaEndereco/{idFuncionario}/endereco")
     @ResponseStatus(code = HttpStatus.OK)
     @Operation(summary = "Busca Endereço por ID do Funcionário")
     EnderecoDetalhadoResponse getBuscaEnderecoPorIdDoFuncionario(@PathVariable UUID idFuncionario);
@@ -35,7 +35,7 @@ public interface FuncionarioAPI {
     void patchAlteraFuncionario(@Valid @RequestBody AlteraFuncionarioRequest alteraFuncionarioRequest,
                                 @PathVariable UUID idFuncionario);
 
-    @PatchMapping("/editaEndereco/{idFuncionario}")
+    @PatchMapping("/editaEndereco/{idFuncionario}/endereco")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(summary = "Altera Endereco do Funcionário")
     void patchAlteraEnderecoPorIdDoFuncionario(@Valid @RequestBody EnderecoNovoRequest alteraEnderecoRequest,
