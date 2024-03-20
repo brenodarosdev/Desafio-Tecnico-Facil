@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /gestaofuncionarios/api/v1
+    context-path: /gestaoFuncionarios/api/v1
 
 springdoc:
   swagger-ui:
