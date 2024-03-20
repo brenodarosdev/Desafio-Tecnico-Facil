@@ -14,12 +14,12 @@ import java.util.UUID;
 @Tag(name = "Funcionário")
 @RequestMapping("/funcionario")
 public interface FuncionarioAPI {
-    @PostMapping
+    @PostMapping("/novoFuncionario")
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(summary = "Cria novo Funcionário")
     FuncionarioCriadoResponse postNovoFuncionario(@Valid @RequestBody FuncionarioNovoRequest funcionarioNovoRequest);
 
-    @GetMapping("/{idFuncionario}")
+    @GetMapping("/buscaFuncionario/{idFuncionario}")
     @ResponseStatus(code = HttpStatus.OK)
     @Operation(summary = "Busca Funcionário por ID")
     FuncionarioDetalhadoResponse getBuscaFuncionarioPorId(@PathVariable UUID idFuncionario);
